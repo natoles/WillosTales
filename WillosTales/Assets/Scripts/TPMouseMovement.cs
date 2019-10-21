@@ -5,6 +5,7 @@ using UnityEngine;
 public class TPMouseMovement : MonoBehaviour
 {
     public GameObject playerCamera;
+    public GameObject cameraRotator;
     public float sensitivityX = 15F;
     public float sensitivityY = 15F;
     public float minimumY = -60F;
@@ -17,7 +18,7 @@ public class TPMouseMovement : MonoBehaviour
         rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
         rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-        playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+        cameraRotator.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
         transform.localEulerAngles = new Vector3(0, rotationX, 0);
     }
 
