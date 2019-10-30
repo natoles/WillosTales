@@ -11,6 +11,7 @@ public class GameControl : MonoBehaviour
     LineRenderer soulLink;
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
+    float maxSoulDist = 10f; //max distance between soul and player
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
@@ -42,6 +43,13 @@ public class GameControl : MonoBehaviour
 
         soulLink.SetPosition(0, playerFP.transform.position);
         soulLink.SetPosition(1, playerTP.transform.position);
+
+        if (isSoulMode && Vector3.Distance(playerFP.transform.position, playerTP.transform.position) > maxSoulDist)
+        {
+            Debug.Log("Soul is too far !");
+            ModeChangerHandler();
+        }
+
 
 
     }
