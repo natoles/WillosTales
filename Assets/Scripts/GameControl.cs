@@ -8,18 +8,24 @@ public class GameControl : MonoBehaviour
     public GameObject playerTP;
     public GameObject playerFP;
     public GameObject postProcessVolume;
+    LineRenderer soulLink;
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
+
     TPMouseMovement TPMouse;
     TPMovement TPMove;
     FPMouseMovement FPMouse;
     FPMovement FPMove;
+
+    
+
     void Start()
     {
         TPMouse = playerTP.GetComponent<TPMouseMovement>();
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPMouse = playerFP.GetComponent<FPMouseMovement>();
         FPMove  = playerFP.GetComponent<FPMovement>();
+        soulLink = playerTP.GetComponent<LineRenderer>();
 
         Physics.IgnoreCollision(playerFP.GetComponent<Collider>(), playerTP.GetComponent<Collider>());
 
@@ -33,6 +39,11 @@ public class GameControl : MonoBehaviour
         {
             ModeChangerHandler();  
         }
+
+        soulLink.SetPosition(0, playerFP.transform.position);
+        soulLink.SetPosition(1, playerTP.transform.position);
+
+
     }
 
 
