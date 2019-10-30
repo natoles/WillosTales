@@ -7,6 +7,7 @@ public class GameControl : MonoBehaviour
     public GameObject cam; //camera rotator
     public GameObject playerTP;
     public GameObject playerFP;
+    public GameObject postProcessVolume;
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
     TPMouseMovement TPMouse;
@@ -19,6 +20,8 @@ public class GameControl : MonoBehaviour
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPMouse = playerFP.GetComponent<FPMouseMovement>();
         FPMove  = playerFP.GetComponent<FPMovement>();
+
+        Physics.IgnoreCollision(playerFP.GetComponent<Collider>(), playerTP.GetComponent<Collider>());
 
         ModeChangerHandler();
     }
@@ -40,6 +43,7 @@ public class GameControl : MonoBehaviour
         {
             //Enters in FP 
             playerTP.SetActive(false);
+            postProcessVolume.SetActive(false);
 
             cam.transform.parent = playerFP.transform;
             cam.transform.localPosition = new Vector3(0, 0.4f, 0.2f);
@@ -53,6 +57,7 @@ public class GameControl : MonoBehaviour
         {
             //Enters in TP 
             playerTP.SetActive(true);
+            postProcessVolume.SetActive(true);
             playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2 ; //Soul spawn position
 
             cam.transform.parent = playerTP.transform.GetChild(0).transform;
