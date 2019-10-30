@@ -18,10 +18,11 @@ public class TPMouseMovement : MonoBehaviour
         {
             float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
+            //rotationY = cameraRotator.transform.localEulerAngles.y;
             rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
             rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-            cameraRotator.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            cameraRotator.transform.localEulerAngles = new Vector3(-rotationY, cameraRotator.transform.localEulerAngles.y, cameraRotator.transform.localEulerAngles.z);
             transform.localEulerAngles = new Vector3(0, rotationX, 0);
         }
     }

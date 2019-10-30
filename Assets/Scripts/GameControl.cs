@@ -38,8 +38,12 @@ public class GameControl : MonoBehaviour
         Debug.Log("Changement mode");
         if (isSoulMode)
         {
+            //Enters in FP 
+            playerTP.SetActive(false);
+
             cam.transform.parent = playerFP.transform;
             cam.transform.localPosition = new Vector3(0, 0.4f, 0.2f);
+
             TPMouse.canMove = false;
             TPMove.canMove = false;
             FPMouse.canMove = true;
@@ -47,9 +51,16 @@ public class GameControl : MonoBehaviour
         }
         else
         {
+            //Enters in TP 
+            playerTP.SetActive(true);
+            playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2 ; //Soul spawn position
+
             cam.transform.parent = playerTP.transform.GetChild(0).transform;
             cam.transform.localPosition = new Vector3(0, 1, -8f);
+            
+            playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
             cam.transform.localEulerAngles = Vector3.zero;
+
             TPMouse.canMove = true;
             TPMove.canMove = true;
             FPMouse.canMove = false;
