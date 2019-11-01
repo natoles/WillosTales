@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseMovement : MonoBehaviour
+public class FPMouseMovement : MonoBehaviour
 {
     public GameObject playerCamera;
     public float sensitivityX = 15F;
@@ -10,15 +10,19 @@ public class MouseMovement : MonoBehaviour
     public float minimumY = -60F;
     public float maximumY = 60F;
     float rotationY = 0F;
+    public bool canMove;
     void Update()
     {
-        float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+        if (canMove)
+        {
+            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
-        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-        playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
-        transform.localEulerAngles = new Vector3(0, rotationX, 0);
+            playerCamera.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
+            transform.localEulerAngles = new Vector3(0, rotationX, 0);
+        }
     }
 
     void Start()

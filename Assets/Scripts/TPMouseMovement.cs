@@ -11,15 +11,20 @@ public class TPMouseMovement : MonoBehaviour
     public float minimumY = -60F;
     public float maximumY = 60F;
     float rotationY = 0F;
+    public bool canMove;
     void Update()
     {
-        float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
+        if (canMove)
+        {
+            float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
 
-        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
+            //rotationY = cameraRotator.transform.localEulerAngles.y;
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationY = Mathf.Clamp(rotationY, minimumY, maximumY);
 
-        cameraRotator.transform.localEulerAngles = new Vector3(-rotationY, 0, 0);
-        transform.localEulerAngles = new Vector3(0, rotationX, 0);
+            cameraRotator.transform.localEulerAngles = new Vector3(-rotationY, cameraRotator.transform.localEulerAngles.y, cameraRotator.transform.localEulerAngles.z);
+            transform.localEulerAngles = new Vector3(0, rotationX, 0);
+        }
     }
 
     void Start()
