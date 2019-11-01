@@ -170,8 +170,9 @@ MonoBehaviour:
   movingPlatform: {fileID: 6500725}
   position1: {fileID: 2046050754}
   position2: {fileID: 273706583}
-  Speed: 2
-  activated: 0
+  movingSpeed: 0
+  rotationSpeed: 0
+  activated: 1
   repeated: 1
   uniqueMove: 0
 --- !u!65 &6500727
@@ -354,6 +355,7 @@ GameObject:
   - component: {fileID: 149830111}
   - component: {fileID: 149830110}
   - component: {fileID: 149830114}
+  - component: {fileID: 149830115}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Selectable
@@ -427,12 +429,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149830109}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 0.83, z: 6.21}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.5767593, y: 1.7304318, z: 3.5736773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_Father: {fileID: 1254528490}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &149830114
 MonoBehaviour:
@@ -448,6 +450,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 6500726}
   reversible: 1
+--- !u!114 &149830115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149830109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &273706582
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,6 +605,7 @@ GameObject:
   - component: {fileID: 351018727}
   - component: {fileID: 351018726}
   - component: {fileID: 351018730}
+  - component: {fileID: 351018731}
   m_Layer: 0
   m_Name: Obstacle2
   m_TagString: Selectable
@@ -681,6 +702,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &351018731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351018725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &400722734
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 7.0723, z: 3.1949}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &631499601
 GameObject:
@@ -834,6 +873,7 @@ GameObject:
   - component: {fileID: 640920751}
   - component: {fileID: 640920750}
   - component: {fileID: 640920749}
+  - component: {fileID: 640920754}
   m_Layer: 0
   m_Name: Lever (1)
   m_TagString: Selectable
@@ -921,13 +961,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 640920748}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.6, y: 0.92, z: 2.61}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.9932408, y: 1.8204317, z: -0.026322842}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1254528490}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640920754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640920748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &668339533 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4185733550030239623, guid: 6f8980e95d6b5874798de9c484019964,
@@ -952,6 +1010,7 @@ GameObject:
   - component: {fileID: 771924650}
   - component: {fileID: 771924649}
   - component: {fileID: 771924648}
+  - component: {fileID: 771924652}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Selectable
@@ -1033,6 +1092,24 @@ Transform:
   m_Father: {fileID: 1254528490}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &771924652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771924647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &805230299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1083,10 +1160,11 @@ MonoBehaviour:
   movingPlatform: {fileID: 805230300}
   position1: {fileID: 1131929183}
   position2: {fileID: 2042585021}
-  Speed: 1
-  activated: 0
-  repeated: 0
-  uniqueMove: 1
+  movingSpeed: 0
+  rotationSpeed: 0
+  activated: 1
+  repeated: 1
+  uniqueMove: 0
 --- !u!65 &805230302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1379,10 +1457,11 @@ MonoBehaviour:
   movingPlatform: {fileID: 1191976124}
   position1: {fileID: 1372371556}
   position2: {fileID: 1846936513}
-  Speed: 1
-  activated: 0
-  repeated: 0
-  uniqueMove: 1
+  movingSpeed: 0
+  rotationSpeed: 0
+  activated: 1
+  repeated: 1
+  uniqueMove: 0
 --- !u!65 &1191976126
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1455,6 +1534,7 @@ GameObject:
   - component: {fileID: 1234911044}
   - component: {fileID: 1234911043}
   - component: {fileID: 1234911047}
+  - component: {fileID: 1234911048}
   m_Layer: 0
   m_Name: Obstacle1
   m_TagString: Selectable
@@ -1551,6 +1631,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1234911048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234911042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1254528489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1682,8 @@ Transform:
   - {fileID: 2016791165}
   - {fileID: 1388449971}
   - {fileID: 771924651}
+  - {fileID: 149830113}
+  - {fileID: 640920753}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1597,6 +1697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1264782050}
   - component: {fileID: 1264782049}
+  - component: {fileID: 1264782051}
   m_Layer: 0
   m_Name: SelectionManager
   m_TagString: Untagged
@@ -1617,8 +1718,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectableTag: Selectable
-  highlightMaterial: {fileID: 2100000, guid: 956076b9e846a87458170d6fa4f09f33, type: 2}
-  defaultMaterial: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &1264782050
 Transform:
   m_ObjectHideFlags: 0
@@ -1633,6 +1732,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264782051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264782048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce58f0248848ead438c82466adfc62f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277496776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1887,7 @@ GameObject:
   - component: {fileID: 1388449974}
   - component: {fileID: 1388449973}
   - component: {fileID: 1388449972}
+  - component: {fileID: 1388449975}
   m_Layer: 10
   m_Name: Cube
   m_TagString: Selectable
@@ -1856,6 +1968,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1388449970}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1388449975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388449970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1529351394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 7.0723, z: 3.1949}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1713484026
 GameObject:
@@ -2257,6 +2387,7 @@ GameObject:
   - component: {fileID: 2016791163}
   - component: {fileID: 2016791162}
   - component: {fileID: 2016791166}
+  - component: {fileID: 2016791167}
   m_Layer: 0
   m_Name: Obstacle3
   m_TagString: Selectable
@@ -2353,6 +2484,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2016791167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2016791161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0, g: 0.7649336, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2042585020
 GameObject:
   m_ObjectHideFlags: 0
