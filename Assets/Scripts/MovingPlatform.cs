@@ -11,6 +11,7 @@ public class MovingPlatform : MonoBehaviour
     public float rotationSpeed;         // Speed of the rotation
     public bool activated = true;       // Is activated. If not, gameobject's not moving
     public bool repeated = true;        // Is the platform moving repeatedly ?
+    public bool canRotate = false;      // Can the platform rotate ?
     public bool uniqueMove = false;     // Can the platform go back to its first position ?
     private bool moveReached = false;   // Only for uniqueMove-mode. Activated when the movement is complete
 
@@ -42,8 +43,12 @@ public class MovingPlatform : MonoBehaviour
 
             Vector3 direction = Vector3.Normalize(position2.position - position1.position);
             newPosition += (Vector3)(movingSpeed * Time.deltaTime * direction);
-            movingPlatform.rotation = Quaternion.Lerp(movingPlatform.rotation, position2.rotation, rotationSpeed * Time.deltaTime);
             movingPlatform.position = newPosition;
+
+            if (canRotate)
+            {
+                movingPlatform.rotation = Quaternion.Lerp(movingPlatform.rotation, position2.rotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 
