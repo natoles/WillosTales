@@ -7,7 +7,8 @@ public class MovingPlatform : MonoBehaviour
     public Transform movingPlatform;    // Position of current objet
     public Transform position1;         // First position to reach
     public Transform position2;         // Third position to reach
-    public float Speed;                 // Speed
+    public float movingSpeed;           // Speed of the movement
+    public float rotationSpeed;         // Speed of the rotation
     public bool activated = true;       // Is activated. If not, gameobject's not moving
     public bool repeated = true;        // Is the platform moving repeatedly ?
     public bool uniqueMove = false;     // Can the platform go back to its first position ?
@@ -40,7 +41,8 @@ public class MovingPlatform : MonoBehaviour
             }
 
             Vector3 direction = Vector3.Normalize(position2.position - position1.position);
-            newPosition += (Vector3)(Speed * Time.deltaTime * direction);
+            newPosition += (Vector3)(movingSpeed * Time.deltaTime * direction);
+            movingPlatform.rotation = Quaternion.Lerp(movingPlatform.rotation, position2.rotation, rotationSpeed * Time.deltaTime);
             movingPlatform.position = newPosition;
         }
     }
