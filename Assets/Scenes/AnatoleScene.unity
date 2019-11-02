@@ -170,9 +170,9 @@ MonoBehaviour:
   movingPlatform: {fileID: 6500725}
   position1: {fileID: 2046050754}
   position2: {fileID: 273706583}
-  movingSpeed: 0
-  rotationSpeed: 0
-  activated: 1
+  movingSpeed: 2
+  rotationSpeed: 0.3
+  activated: 0
   repeated: 1
   canRotate: 0
   uniqueMove: 0
@@ -514,13 +514,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 273706582}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0.29419756, z: -0, w: 0.9557446}
   m_LocalPosition: {x: 9.01, y: 1.07, z: 4.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1277496777}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 34.219, z: 0}
 --- !u!65 &273706584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1180,12 +1180,12 @@ MonoBehaviour:
   movingPlatform: {fileID: 805230300}
   position1: {fileID: 1131929183}
   position2: {fileID: 2042585021}
-  movingSpeed: 0
-  rotationSpeed: 0
-  activated: 1
-  repeated: 1
+  movingSpeed: 2
+  rotationSpeed: 0.3
+  activated: 0
+  repeated: 0
   canRotate: 0
-  uniqueMove: 0
+  uniqueMove: 1
 --- !u!65 &805230302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1478,12 +1478,12 @@ MonoBehaviour:
   movingPlatform: {fileID: 1191976124}
   position1: {fileID: 1372371556}
   position2: {fileID: 1846936513}
-  movingSpeed: 0
-  rotationSpeed: 0
-  activated: 1
-  repeated: 1
+  movingSpeed: 2
+  rotationSpeed: 0.3
+  activated: 0
+  repeated: 0
   canRotate: 0
-  uniqueMove: 0
+  uniqueMove: 1
 --- !u!65 &1191976126
 BoxCollider:
   m_ObjectHideFlags: 0
