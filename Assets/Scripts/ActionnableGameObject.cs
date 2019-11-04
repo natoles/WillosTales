@@ -5,6 +5,9 @@ using UnityEngine;
 public class ActionnableGameObject : MonoBehaviour
 {
     public MovingPlatform target;   // MovingPlatform to move
+    public Transform playerPos;
+    [SerializeField, Range(0f, 5f)]
+    private float activationMaxDist = 2f;
     public bool reversible;         // Can the movingplatform get activated and disactivated ?
     private bool targetInitialState;// Initial state of the target (bool), only used for not-reversable object
 
@@ -16,7 +19,11 @@ public class ActionnableGameObject : MonoBehaviour
 
     void OnMouseDown()
     {
-        activateObject();
+        if (Vector3.Distance(playerPos.position, transform.position) < activationMaxDist) //If player too far, can't activate
+        {
+            activateObject();
+        }
+        
     }
 
     public void activateObject()
