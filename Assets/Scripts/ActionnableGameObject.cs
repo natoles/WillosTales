@@ -13,6 +13,12 @@ public class ActionnableGameObject : MonoBehaviour
         targetInitialState = target.activated;
     }
 
+
+    void OnMouseDown()
+    {
+        activateObject();
+    }
+
     public void activateObject()
     {
         if(reversible)
