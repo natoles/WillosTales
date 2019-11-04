@@ -283,6 +283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 805230301}
+  playerPos: {fileID: 668339540}
+  activationMaxDist: 2
   reversible: 0
 --- !u!136 &49444199
 CapsuleCollider:
@@ -469,6 +471,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 6500726}
+  playerPos: {fileID: 0}
+  activationMaxDist: 2
   reversible: 1
 --- !u!114 &149830115
 MonoBehaviour:
@@ -914,6 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1191976125}
+  playerPos: {fileID: 0}
+  activationMaxDist: 2
   reversible: 0
 --- !u!65 &640920750
 BoxCollider:
