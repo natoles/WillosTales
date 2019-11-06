@@ -3,13 +3,13 @@
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable";
-    
-    private ISelectionResponse _selectionResponse;
+
+    private ISelectionResponse[] _selectionResponse;
     private Transform _selection;
 
     private void Awake()
     {
-        _selectionResponse = GetComponent<ISelectionResponse>();
+        _selectionResponse = GetComponents<ISelectionResponse>();
     }
 
     // Start is called before the first frame update
@@ -22,11 +22,11 @@ public class SelectionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Deselaction/Selection
+        // Deselection
         if (_selection != null)
-        {
-            _selectionResponse.OnDeselect(_selection);
-        }
+            foreach (var response in _selectionResponse)
+                response.OnDeselect(_selection);
+
 
         // Creating a Ray
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,15 +37,13 @@ public class SelectionManager : MonoBehaviour
         {
             var selection = hit.transform;
             if (selection.CompareTag(selectableTag))
-            {
                 _selection = selection;
-            }
+            
         }
 
-        // Selection/Deselection
+        // Selection
         if (_selection != null)
-        {
-            _selectionResponse.OnSelect(_selection);
-        }
+            foreach (var response in _selectionResponse)
+                response.OnSelect(_selection);
     }
 }
