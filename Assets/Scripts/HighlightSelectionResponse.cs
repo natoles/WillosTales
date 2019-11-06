@@ -7,19 +7,19 @@ internal class HighlightSelectionResponse : MonoBehaviour, ISelectionResponse
     
     public void OnSelect(Transform selection)
     {
-        var SelectionRenderer = selection.GetComponent<Renderer>();
-        if (SelectionRenderer != null)
+        var selectionRenderer = selection.GetComponent<Renderer>();
+        if (selectionRenderer != null)
         {
-            SelectionRenderer.material = this.highlightMaterial;
+            selectionRenderer.material = this.highlightMaterial;
         }
     }
     
     public void OnDeselect(Transform selection)
     {
-        var SelectionRenderer = selection.GetComponent<Renderer>();
-        if (SelectionRenderer != null)
+        var selectionRenderer = selection.GetComponent<Renderer>();
+        if (selectionRenderer != null)
         {
-            SelectionRenderer.material = this.defaultMaterial;
+            selectionRenderer.material = this.defaultMaterial;
         }
     }
 }
