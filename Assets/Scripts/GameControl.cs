@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameControl : MonoBehaviour
     public GameObject playerTP;
     public GameObject playerFP;
     public GameObject postProcessVolume;
+    public GameObject menu;
     LineRenderer soulLink;
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
@@ -36,10 +38,16 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Open or close the menu if the ESC key is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OpenCloseMenu();
+        
+        // If the menu is open, don't execute the rest
+        if (menu.activeSelf) return;
+        
+        // Switch between FP and TP view if the L key is pressed
         if (Input.GetKeyDown(changeKey))
-        {
-            ModeChangerHandler();  
-        }
+            ModeChangerHandler();
 
         soulLink.SetPosition(0, playerFP.transform.position);
         soulLink.SetPosition(1, playerTP.transform.position);
@@ -49,11 +57,40 @@ public class GameControl : MonoBehaviour
             Debug.Log("Soul is too far !");
             ModeChangerHandler();
         }
-
-
-
     }
-
+    
+    public void OpenCloseMenu()
+    {
+        menu.SetActive(!menu.activeSelf);
+        if (!menu.activeSelf) 
+        {
+            // Exit the menu
+            Debug.Log("Closing the menu.");
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            if (isSoulMode)
+            {
+                TPMouse.canMove = TPMove.canMove = true;
+                FPMouse.canMove = FPMove.canMove = false;
+            }
+            else
+            {
+                TPMouse.canMove = TPMove.canMove = false;
+                FPMouse.canMove = FPMove.canMove = true;
+            }
+        }
+        else 
+        {
+            // Open the menu
+            Debug.Log("Opening the menu.");
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            TPMouse.canMove = false;
+            TPMove.canMove = false;
+            FPMouse.canMove = false;
+            FPMove.canMove = false;
+        }
+    }
 
     void ModeChangerHandler()
     {
