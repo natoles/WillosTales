@@ -7,6 +7,7 @@ public class PressurePlate : MonoBehaviour
     Collider pressureZone;
     public bool active = false;
     public LayerMask activeLayers;
+
     // Start is called before the first frame update
     void Start()
     {
