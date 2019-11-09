@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     
     public void ResumeGame()
     {
+        Debug.Log("TODO : Resume the game.");
     }
     
     public void ExitGame()
