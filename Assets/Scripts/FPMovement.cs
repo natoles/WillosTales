@@ -13,7 +13,7 @@ public class FPMovement : MonoBehaviour
     Rigidbody playerRb;
     public bool canMove;
 
-    void Awake()
+    void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
