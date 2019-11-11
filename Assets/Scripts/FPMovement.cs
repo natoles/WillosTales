@@ -18,6 +18,7 @@ public class FPMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerRb.freezeRotation = true;
         playerRb.useGravity = false;
+        FindObjectOfType<AudioManager>().Play("Walking");
     }
 
     void FixedUpdate()
@@ -37,6 +38,16 @@ public class FPMovement : MonoBehaviour
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
             playerRb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+            // Walking sounds
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                FindObjectOfType<AudioManager>().UnPause("Walking");
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().Pause("Walking");
+            }
 
             if (grounded)
             {
