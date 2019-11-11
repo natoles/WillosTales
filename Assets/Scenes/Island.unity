@@ -3245,9 +3245,9 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: MainTheme
     clip: {fileID: 8300000, guid: 118edb3ba2e46be43bd0a483c47d27b2, type: 3}
-    volume: 0.2
+    volume: 0.1
     volumeVariance: 0
-    pitch: 1
+    pitch: 0.6
     pitchVariance: 0
     loop: 1
     mixerGroup: {fileID: 0}
@@ -3264,7 +3264,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &735429225
 PrefabInstance:
@@ -8202,7 +8202,7 @@ Transform:
   - {fileID: 896997807}
   - {fileID: 579275015}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1574439552 stripped
 Transform:
@@ -9207,7 +9207,7 @@ Transform:
   - {fileID: 2075803495}
   - {fileID: 1770095578}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1749871719
 PrefabInstance:
@@ -12439,5 +12439,5 @@ Transform:
   - {fileID: 1127455131}
   - {fileID: 925815606}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
