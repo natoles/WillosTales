@@ -10,11 +10,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     
-    public void ResumeGame()
-    {
-        Debug.Log("TODO : Resume the game.");
-    }
-    
     public void ExitGame()
     {
         Debug.Log("Exit the game.");
