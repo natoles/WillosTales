@@ -31,7 +31,9 @@ public class AudioManager : MonoBehaviour
 
 			s.source.outputAudioMixerGroup = mixerGroup;
 		}
-	}
+
+        Play("MainTheme");
+    }
 
     public void Pause(string sound)
     {

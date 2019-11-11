@@ -3243,6 +3243,15 @@ MonoBehaviour:
     loop: 1
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
+  - name: MainTheme
+    clip: {fileID: 8300000, guid: 118edb3ba2e46be43bd0a483c47d27b2, type: 3}
+    volume: 0.2
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 0}
+    source: {fileID: 0}
 --- !u!4 &714496225
 Transform:
   m_ObjectHideFlags: 0
