@@ -25,9 +25,8 @@ public class PressurePlate : MonoBehaviour
         if (activeLayers == (activeLayers | (1 << col.gameObject.layer)))
         {
             active = true;
-        } 
-
-
+        }
+        FindObjectOfType<AudioManager>().Play("Switch");
     }
 
     private void OnTriggerExit(Collider col)
@@ -36,5 +35,6 @@ public class PressurePlate : MonoBehaviour
         {
             active = false;
         }
+        FindObjectOfType<AudioManager>().Play("Switch");
     }
 }

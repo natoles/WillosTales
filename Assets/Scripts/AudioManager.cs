@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
 		}
 
         Play("MainTheme");
+        Play("Wind");
     }
 
     public void Pause(string sound)
