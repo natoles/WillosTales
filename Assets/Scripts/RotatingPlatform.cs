@@ -43,7 +43,7 @@ public class RotatingPlatform : MonoBehaviour
             // Move while the distance isn't reached
             Vector3 direction = Vector3.Normalize(rotation2.position - rotation1.position);
             newRotation += (Vector3)(rotationSpeed * Time.deltaTime * direction);
-            rotatingPlatform.position = newRotation;
+            rotatingPlatform.rotation = Quaternion.RotateTowards(rotatingPlatform.rotation, rotation2.rotation, rotationSpeed * Time.deltaTime);
         }
     }
     public void activate(bool predicate)
