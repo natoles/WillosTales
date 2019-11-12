@@ -12,6 +12,7 @@ public class FPMovement : MonoBehaviour
     private bool grounded = false;
     Rigidbody playerRb;
     public bool canMove;
+    Animator anim;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class FPMovement : MonoBehaviour
         playerRb.freezeRotation = true;
         playerRb.useGravity = false;
         FindObjectOfType<AudioManager>().Play("Walking");
+        anim = GetComponent<Animator>();
     }
 
     void FixedUpdate()
@@ -43,10 +45,13 @@ public class FPMovement : MonoBehaviour
             if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 FindObjectOfType<AudioManager>().UnPause("Walking");
+                anim.SetBool("isWalking", true);
+
             }
             else
             {
                 FindObjectOfType<AudioManager>().Pause("Walking");
+                anim.SetBool("isWalking", false);
             }
 
             if (grounded)
@@ -54,6 +59,8 @@ public class FPMovement : MonoBehaviour
                 // Jump
                 if (canJump && Input.GetButton("Jump"))
                 {
+                    anim.SetBool("isJumping", true);
+                    anim.SetBool("grounded", false);
                     playerRb.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
                 }
 
@@ -69,6 +76,8 @@ public class FPMovement : MonoBehaviour
     void OnCollisionStay()
     {
         grounded = true;
+        anim.SetBool("isJumping", false);
+        anim.SetBool("grounded", true);
     }
 
     float CalculateJumpVerticalSpeed()
