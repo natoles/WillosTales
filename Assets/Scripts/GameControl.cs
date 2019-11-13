@@ -100,7 +100,7 @@ public class GameControl : MonoBehaviour
             postProcessVolume.SetActive(false);
 
             cam.transform.parent = playerFP.transform;
-            cam.transform.localPosition = new Vector3(0, 0.4f, 0.2f);
+            cam.transform.localPosition = new Vector3(0.1f, 1, 0.15f);
 
             TPMouse.canMove = false;
             TPMove.canMove = false;
