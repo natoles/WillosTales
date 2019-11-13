@@ -42,6 +42,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         private AudioSource m_AudioSource;
 
+        Animator anim;
+
         // Use this for initialization
         private void Start()
         {
@@ -55,6 +57,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+
+            anim = GetComponent<Animator>();
         }
 
 
@@ -81,6 +85,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            {
+                anim.SetBool("isWalking", true);
+
+            }
+            else
+            {
+                anim.SetBool("isWalking", false);
+            }
+
+            anim.SetBool("grounded", !m_Jumping);
+            anim.SetBool("isJumping", m_Jumping);
+
+            Debug.Log(m_Jumping);
         }
 
 

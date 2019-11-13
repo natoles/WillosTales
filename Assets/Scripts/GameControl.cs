@@ -30,7 +30,7 @@ public class GameControl : MonoBehaviour
         FPController = playerFP.GetComponent<FirstPersonController>();
         soulLink = playerTP.GetComponent<LineRenderer>();
 
-        Physics.IgnoreCollision(playerFP.GetComponent<Collider>(), playerTP.GetComponent<Collider>());
+        Physics.IgnoreCollision(playerFP.GetComponent<CharacterController>(), playerTP.GetComponent<Collider>());
 
         ModeChangerHandler();
     }
