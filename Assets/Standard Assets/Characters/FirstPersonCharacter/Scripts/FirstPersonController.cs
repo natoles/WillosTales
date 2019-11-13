@@ -98,8 +98,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             anim.SetBool("grounded", !m_Jumping);
             anim.SetBool("isJumping", m_Jumping);
-
-            Debug.Log(m_Jumping);
         }
 
 
