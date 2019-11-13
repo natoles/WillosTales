@@ -6,7 +6,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameControl : MonoBehaviour
 {
-    public GameObject cam; //camera rotator
+    public GameObject cam;
+    public GameObject camRot;
     public GameObject playerTP;
     public GameObject playerFP;
     public GameObject postProcessVolume;
@@ -113,7 +114,7 @@ public class GameControl : MonoBehaviour
             postProcessVolume.SetActive(true);
             playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2 ; //Soul spawn position
 
-            cam.transform.parent = playerTP.transform.GetChild(0).transform;
+            cam.transform.parent = camRot.transform;
             cam.transform.localPosition = new Vector3(0, 1, -8f);
             
             playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
