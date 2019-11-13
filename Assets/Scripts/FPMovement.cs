@@ -76,7 +76,7 @@ public class FPMovement : MonoBehaviour
     void OnCollisionStay()
     {
         grounded = true;
-        anim.SetBool("isJumping", false);
+    
         anim.SetBool("grounded", true);
     }
 

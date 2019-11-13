@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class GameControl : MonoBehaviour
 {
@@ -17,8 +18,7 @@ public class GameControl : MonoBehaviour
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
-    FPMouseMovement FPMouse;
-    FPMovement FPMove;
+    FirstPersonController FPController;
 
     
 
@@ -26,8 +26,7 @@ public class GameControl : MonoBehaviour
     {
         TPMouse = playerTP.GetComponent<TPMouseMovement>();
         TPMove  = playerTP.GetComponent<TPMovement>();
-        FPMouse = playerFP.GetComponent<FPMouseMovement>();
-        FPMove  = playerFP.GetComponent<FPMovement>();
+        FPController = playerFP.GetComponent<FirstPersonController>();
         soulLink = playerTP.GetComponent<LineRenderer>();
 
         Physics.IgnoreCollision(playerFP.GetComponent<Collider>(), playerTP.GetComponent<Collider>());
@@ -71,12 +70,12 @@ public class GameControl : MonoBehaviour
             if (isSoulMode)
             {
                 TPMouse.canMove = TPMove.canMove = true;
-                FPMouse.canMove = FPMove.canMove = false;
+                FPController.enabled = false;
             }
             else
             {
                 TPMouse.canMove = TPMove.canMove = false;
-                FPMouse.canMove = FPMove.canMove = true;
+                FPController.enabled = true;
             }
         }
         else 
@@ -87,8 +86,7 @@ public class GameControl : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             TPMouse.canMove = false;
             TPMove.canMove = false;
-            FPMouse.canMove = false;
-            FPMove.canMove = false;
+            FPController.enabled = false;
         }
     }
 
@@ -106,8 +104,7 @@ public class GameControl : MonoBehaviour
 
             TPMouse.canMove = false;
             TPMove.canMove = false;
-            FPMouse.canMove = true;
-            FPMove.canMove = true;
+            FPController.enabled = true;
         }
         else
         {
@@ -124,8 +121,7 @@ public class GameControl : MonoBehaviour
 
             TPMouse.canMove = true;
             TPMove.canMove = true;
-            FPMouse.canMove = false;
-            FPMove.canMove = false;
+            FPController.enabled = false;
         }
         isSoulMode = !isSoulMode;
     }
