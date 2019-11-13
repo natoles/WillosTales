@@ -8,12 +8,17 @@ public class Gate2Control : MonoBehaviour
     public PressurePlate pP1;
     public PressurePlate pP2;
     public MovingPlatform gate;
+    public RotatingPlatform rotatingGate;
     private bool gateInitialState;
+    private bool rotatingGateInitialState;
     public bool reversible;         // Can the movingplatform get activated and disactivated ?
 
     void Start()
     {
-        gateInitialState = gate.activated;
+        if(gate != null)
+            gateInitialState = gate.activated;
+        if (rotatingGate != null)
+            rotatingGateInitialState = rotatingGate.activated;
     }
 
     // Update is called once per frame
@@ -23,11 +28,17 @@ public class Gate2Control : MonoBehaviour
         {
             if (reversible)
             {
-                gate.activate(!gate.activated);
+                if(gate!=null)
+                    gate.activate(!gate.activated);
+                if (rotatingGate != null)
+                    rotatingGate.activate(!gate.activated);
             }
             else
             {
-                gate.activate(!gateInitialState);
+                if (gate != null)
+                    gate.activate(!gateInitialState);
+                if (rotatingGate != null)
+                    rotatingGate.activate(!rotatingGateInitialState);
             }
         }
     }
