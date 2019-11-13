@@ -9,10 +9,11 @@ public class GameControl : MonoBehaviour
     public GameObject cam;
     public GameObject camRot;
     public GameObject playerTP;
+    public GameObject soulLink;
     public GameObject playerFP;
     public GameObject postProcessVolume;
     public GameObject menu;
-    LineRenderer soulLink;
+
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
     float maxSoulDist = 10f; //max distance between soul and player
@@ -28,7 +29,6 @@ public class GameControl : MonoBehaviour
         TPMouse = playerTP.GetComponent<TPMouseMovement>();
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPController = playerFP.GetComponent<FirstPersonController>();
-        soulLink = playerTP.GetComponent<LineRenderer>();
 
         Physics.IgnoreCollision(playerFP.GetComponent<CharacterController>(), playerTP.GetComponent<Collider>());
 
@@ -48,9 +48,6 @@ public class GameControl : MonoBehaviour
         // Switch between FP and TP view if the L key is pressed
         if (Input.GetKeyDown(changeKey))
             ModeChangerHandler();
-
-        soulLink.SetPosition(0, playerFP.transform.position);
-        soulLink.SetPosition(1, playerTP.transform.position);
 
         if (isSoulMode && Vector3.Distance(playerFP.transform.position, playerTP.transform.position) > maxSoulDist)
         {
@@ -98,10 +95,11 @@ public class GameControl : MonoBehaviour
         {
             //Enters in FP 
             playerTP.SetActive(false);
+            soulLink.SetActive(false);
             postProcessVolume.SetActive(false);
 
             cam.transform.parent = playerFP.transform;
-            cam.transform.localPosition = new Vector3(0.1f, 1, 0.15f);
+            cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f);
 
             TPMouse.canMove = false;
             TPMove.canMove = false;
@@ -111,6 +109,7 @@ public class GameControl : MonoBehaviour
         {
             //Enters in TP 
             playerTP.SetActive(true);
+            soulLink.SetActive(true);
             postProcessVolume.SetActive(true);
             playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2 ; //Soul spawn position
 
