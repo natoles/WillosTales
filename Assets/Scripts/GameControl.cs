@@ -14,6 +14,7 @@ public class GameControl : MonoBehaviour
     public GameObject postProcessVolume;
     public GameObject menu;
 
+    string tpKey = "k";
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
     float maxSoulDist = 10f; //max distance between soul and player
@@ -54,8 +55,20 @@ public class GameControl : MonoBehaviour
             Debug.Log("Soul is too far !");
             ModeChangerHandler();
         }
+
+        #region teleportation
+        if (Input.GetKeyDown(tpKey) && isSoulMode)
+        {
+            playerFP.transform.position = playerTP.transform.position;
+            FPController.isTP = true;
+            Debug.Log("TP");
+            ModeChangerHandler();
+        }
+        #endregion
+        Debug.Log(playerFP.transform.position);
+        Debug.Log(playerTP.transform.position);
     }
-    
+
     public void OpenCloseMenu()
     {
         menu.SetActive(!menu.activeSelf);
@@ -68,23 +81,25 @@ public class GameControl : MonoBehaviour
             if (isSoulMode)
             {
                 TPMouse.canMove = TPMove.canMove = true;
-                FPController.enabled = false;
+                FPController.canMove = false;
             }
             else
             {
                 TPMouse.canMove = TPMove.canMove = false;
-                FPController.enabled = true;
+                FPController.canMove = true;
             }
         }
         else 
         {
+            
             // Open the menu
             Debug.Log("Opening the menu.");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             TPMouse.canMove = false;
             TPMove.canMove = false;
-            FPController.enabled = false;
+            FPController.canMove = false;
+
         }
     }
 
@@ -99,11 +114,11 @@ public class GameControl : MonoBehaviour
             postProcessVolume.SetActive(false);
 
             cam.transform.parent = playerFP.transform;
-            cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f);
+            cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
 
             TPMouse.canMove = false;
             TPMove.canMove = false;
-            FPController.enabled = true;
+            FPController.canMove = true;
         }
         else
         {
@@ -121,7 +136,7 @@ public class GameControl : MonoBehaviour
 
             TPMouse.canMove = true;
             TPMove.canMove = true;
-            FPController.enabled = false;
+            FPController.canMove = false;
         }
         isSoulMode = !isSoulMode;
     }
