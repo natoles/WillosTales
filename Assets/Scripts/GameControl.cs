@@ -65,8 +65,6 @@ public class GameControl : MonoBehaviour
             ModeChangerHandler();
         }
         #endregion
-        Debug.Log(playerFP.transform.position);
-        Debug.Log(playerTP.transform.position);
     }
 
     public void OpenCloseMenu()
