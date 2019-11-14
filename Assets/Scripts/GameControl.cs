@@ -18,6 +18,7 @@ public class GameControl : MonoBehaviour
     string changeKey = "l"; //Key to change mode
     bool isSoulMode = true; //True : soul mode, False : player mode 
     float maxSoulDist = 10f; //max distance between soul and player
+    bool canChange = true;
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
@@ -76,16 +77,7 @@ public class GameControl : MonoBehaviour
             Debug.Log("Closing the menu.");
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            if (isSoulMode)
-            {
-                TPMouse.canMove = TPMove.canMove = true;
-                FPController.canMove = false;
-            }
-            else
-            {
-                TPMouse.canMove = TPMove.canMove = false;
-                FPController.canMove = true;
-            }
+            UnlockInputs();
         }
         else 
         {
@@ -94,48 +86,72 @@ public class GameControl : MonoBehaviour
             Debug.Log("Opening the menu.");
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            TPMouse.canMove = false;
-            TPMove.canMove = false;
-            FPController.canMove = false;
+            LockInputs();
 
         }
     }
 
     void ModeChangerHandler()
     {
-        Debug.Log("Changement mode");
+        if(canChange)
+        {
+            Debug.Log("Changement mode");
+            if (isSoulMode)
+            {
+                //Enters in FP 
+                playerTP.SetActive(false);
+                soulLink.SetActive(false);
+                postProcessVolume.SetActive(false);
+
+                cam.transform.parent = playerFP.transform;
+                cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
+
+                TPMouse.canMove = false;
+                TPMove.canMove = false;
+                FPController.canMove = true;
+            }
+            else
+            {
+                //Enters in TP 
+                playerTP.SetActive(true);
+                soulLink.SetActive(true);
+                postProcessVolume.SetActive(true);
+                playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
+
+                cam.transform.parent = camRot.transform;
+                cam.transform.localPosition = new Vector3(0, 1, -8f);
+
+                playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
+                cam.transform.localEulerAngles = Vector3.zero;
+
+                TPMouse.canMove = true;
+                TPMove.canMove = true;
+                FPController.canMove = false;
+            }
+            isSoulMode = !isSoulMode;
+        }
+    }
+
+    public void LockInputs()
+    {
+        TPMouse.canMove = false;
+        TPMove.canMove = false;
+        FPController.canMove = false;
+        canChange = false;
+    }
+
+    public void UnlockInputs()
+    {
         if (isSoulMode)
         {
-            //Enters in FP 
-            playerTP.SetActive(false);
-            soulLink.SetActive(false);
-            postProcessVolume.SetActive(false);
-
-            cam.transform.parent = playerFP.transform;
-            cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
-
-            TPMouse.canMove = false;
-            TPMove.canMove = false;
-            FPController.canMove = true;
+            TPMouse.canMove = TPMove.canMove = true;
+            FPController.canMove = false;
         }
         else
         {
-            //Enters in TP 
-            playerTP.SetActive(true);
-            soulLink.SetActive(true);
-            postProcessVolume.SetActive(true);
-            playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2 ; //Soul spawn position
-
-            cam.transform.parent = camRot.transform;
-            cam.transform.localPosition = new Vector3(0, 1, -8f);
-            
-            playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
-            cam.transform.localEulerAngles = Vector3.zero;
-
-            TPMouse.canMove = true;
-            TPMove.canMove = true;
-            FPController.canMove = false;
+            TPMouse.canMove = TPMove.canMove = false;
+            FPController.canMove = true;
         }
-        isSoulMode = !isSoulMode;
+        canChange = true;
     }
 }

@@ -22,6 +22,7 @@ public class GrapplingHook : MonoBehaviour
 
     public GameObject playerTP;
     public GameObject soulLink;
+    public GameControl gameControl;
 
     void Update()
     {
@@ -47,9 +48,11 @@ public class GrapplingHook : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && isMoving)
         {
             isMoving = false;
-            FPC.canMove = true;
+            gameControl.UnlockInputs();
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             FPC.m_GravityMultiplier = 2;
+            playerTP.SetActive(false);
+            soulLink.SetActive(false);
         }
 
 
@@ -64,7 +67,7 @@ public class GrapplingHook : MonoBehaviour
         {
             isThrowing = true;
             location = hit.point;
-            FPC.canMove = false;
+            gameControl.LockInputs();
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             FPC.m_GravityMultiplier = 1;
 
@@ -86,7 +89,7 @@ public class GrapplingHook : MonoBehaviour
         {
             isMoving = false;
             isThrowing = false;
-            FPC.canMove = true;
+            gameControl.UnlockInputs();
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             FPC.m_GravityMultiplier = 2;
 
