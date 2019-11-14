@@ -12,21 +12,29 @@ public class GrapplingHook : MonoBehaviour
     public int maxDistance;
 
     public bool isMoving;
+    bool isThrowing;
     public Vector3 location;
 
     public float speed = 10;
     public Transform hook;
 
     public FirstPersonController FPC;
-    public LineRenderer LR;
+
+    public GameObject playerTP;
+    public GameObject soulLink;
 
     void Update()
     {
 
-        // Envois du grappin
-        if (Input.GetKey(KeyCode.J))
+        // Envoi du grappin
+        if (Input.GetKey(KeyCode.J) && !isThrowing && !isMoving)
         {
             Grapple();
+        }
+
+        if(isThrowing)
+        {
+            SoulThrow();
         }
 
         // Si le personnage vole, on l'envoie vers le point d'arrivÃ©e 
@@ -40,7 +48,6 @@ public class GrapplingHook : MonoBehaviour
         {
             isMoving = false;
             FPC.canMove = true;
-            LR.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             FPC.m_GravityMultiplier = 2;
         }
@@ -55,13 +62,15 @@ public class GrapplingHook : MonoBehaviour
         // Si ce raycast touche quelque chose c'est que la grappin est utilisable
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, maxDistance, surfaces))
         {
-            isMoving = true;
+            isThrowing = true;
             location = hit.point;
             FPC.canMove = false;
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             FPC.m_GravityMultiplier = 1;
-            LR.enabled = true;
-            LR.SetPosition(1, location);
+
+            playerTP.SetActive(true);
+            playerTP.transform.position = FPC.transform.position;
+            soulLink.SetActive(true);
         }
 
     }
@@ -69,17 +78,31 @@ public class GrapplingHook : MonoBehaviour
     // DÃ©placement du joueur vers le point touchÃ© par le grappin
     public void MoveToSpot()
     {
+        isThrowing = false;
         transform.position = Vector3.Lerp(transform.position, location, speed * Time.deltaTime / Vector3.Distance(transform.position, location));
-        LR.SetPosition(0, hook.position);
 
         // Si on est Ã  - de 1 unitÃ©(s) de la cible final on dÃ©croche le grappin automatiquement
         if (Vector3.Distance(transform.position, location) < 1f)
         {
             isMoving = false;
+            isThrowing = false;
             FPC.canMove = true;
-            LR.enabled = false;
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             FPC.m_GravityMultiplier = 2;
+
+            playerTP.SetActive(false);
+            soulLink.SetActive(false);
         }
+    }
+
+    public void SoulThrow()
+    {
+        playerTP.transform.position = Vector3.Lerp(playerTP.transform.position, location, speed * 10f * Time.deltaTime / Vector3.Distance(transform.position, location));
+
+        if(Vector3.Distance(playerTP.transform.position, location) < .5f)
+        {
+            isMoving = true;
+        }
+
     }
 }
