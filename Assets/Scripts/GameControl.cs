@@ -99,7 +99,7 @@ public class GameControl : MonoBehaviour
             if (isSoulMode)
             {
                 //Enters in FP 
-                playerTP.SetActive(false);
+                StartCoroutine(DeactivateSoul());
                 soulLink.SetActive(false);
                 postProcessVolume.SetActive(false);
 
@@ -154,4 +154,17 @@ public class GameControl : MonoBehaviour
         }
         canChange = true;
     }
+
+    IEnumerator DeactivateSoul()
+    {
+        playerTP.transform.position = Vector3.zero;
+        //returning 0 will make it wait 1 frame
+        yield return 0;
+        playerTP.SetActive(false);
+
+        //code goes here
+
+
+    }
+
 }
