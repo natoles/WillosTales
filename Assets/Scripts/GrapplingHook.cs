@@ -28,7 +28,7 @@ public class GrapplingHook : MonoBehaviour
     {
 
         // Envoi du grappin
-        if (Input.GetKey(KeyCode.J) && !isThrowing && !isMoving)
+        if (Input.GetKeyDown(KeyCode.J) && !isThrowing && !isMoving)
         {
             Grapple();
         }
@@ -45,7 +45,7 @@ public class GrapplingHook : MonoBehaviour
         }
 
         // Annulation / dÃ©crochage du grappin
-        if (Input.GetKey(KeyCode.Space) && isMoving)
+        if (Input.GetKeyDown(KeyCode.Space) && isMoving)
         {
             isMoving = false;
             gameControl.UnlockInputs();
