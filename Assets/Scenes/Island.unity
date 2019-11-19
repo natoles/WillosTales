@@ -2963,6 +2963,12 @@ Transform:
   m_Father: {fileID: 1574439552}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &650940044 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6571405355526958185, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+    type: 3}
+  m_PrefabInstance: {fileID: 2894322012500177354}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &687637804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 411726, guid: e2ea8b41133ef374e8cdcdc128c38729,
@@ -12200,15 +12206,15 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: 7511420600037989122, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+    - target: {fileID: 826430976826522216, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
         type: 3}
-      propertyPath: m_Layer
-      value: 13
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7511420600037989122, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+    - target: {fileID: 1629507853417235687, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
         type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
+      propertyPath: m_RootOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2894322013390087440, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
         type: 3}
@@ -12688,14 +12694,9 @@ PrefabInstance:
     - target: {fileID: 6571405355526958185, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3870933606110855443, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
-        type: 3}
-      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 826430976826522216, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+    - target: {fileID: 3870933606110855443, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
         type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -12710,5 +12711,20 @@ PrefabInstance:
       propertyPath: FPC
       value: 
       objectReference: {fileID: 59452116}
+    - target: {fileID: 5510865716303176779, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+        type: 3}
+      propertyPath: surfaces.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 554232210269221852, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3796687119361402376, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0,
+        type: 3}
+      propertyPath: endPoint
+      value: 
+      objectReference: {fileID: 650940044}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d83d509e9e4af6c4bb2eec6ead0ba8c0, type: 3}
