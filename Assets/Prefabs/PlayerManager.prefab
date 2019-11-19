@@ -414,7 +414,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.78, z: 0}
 --- !u!82 &9092159979795687857
 AudioSource:
   m_ObjectHideFlags: 0
@@ -632,13 +632,13 @@ MonoBehaviour:
   cam: {fileID: 2894322012272622682}
   surfaces:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 16384
   maxDistance: 100
   isMoving: 0
   location: {x: 0, y: 0, z: 0}
   speed: 10
   hook: {fileID: 2894322012272622663}
-  FPC: {fileID: 0}
+  FPC: {fileID: 826430976826522216}
   playerTP: {fileID: 1629507853417235612}
   soulLink: {fileID: 7511420600037989122}
   gameControl: {fileID: 2894322013390087440}
@@ -653,26 +653,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainCharacter_Final_bis@Idle
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 02df965f282859d429c1bc343533f1ef,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 220c0e2b4c5afb241bd9f1366cc47913, type: 2}
-    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.019
-      objectReference: {fileID: 0}
-    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.088
-      objectReference: {fileID: 0}
-    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.017
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 02df965f282859d429c1bc343533f1ef,
         type: 3}
@@ -729,6 +709,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.019
+      objectReference: {fileID: 0}
+    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.088
+      objectReference: {fileID: 0}
+    - target: {fileID: -4431429744085825124, guid: 02df965f282859d429c1bc343533f1ef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.017
+      objectReference: {fileID: 0}
     - target: {fileID: -1617365279978105996, guid: 02df965f282859d429c1bc343533f1ef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -744,6 +739,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.006
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 02df965f282859d429c1bc343533f1ef,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 220c0e2b4c5afb241bd9f1366cc47913, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02df965f282859d429c1bc343533f1ef, type: 3}
 --- !u!4 &6571405355526958185 stripped
@@ -892,6 +892,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2894322012865543006}
     m_Modifications:
+    - target: {fileID: 4252233885316495917, guid: ddb8d505b45b8994792e3ace013de591,
+        type: 3}
+      propertyPath: m_Name
+      value: SoulLink
+      objectReference: {fileID: 0}
     - target: {fileID: 6092827477260292851, guid: ddb8d505b45b8994792e3ace013de591,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -961,11 +966,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4252233885316495917, guid: ddb8d505b45b8994792e3ace013de591,
-        type: 3}
-      propertyPath: m_Name
-      value: SoulLink
       objectReference: {fileID: 0}
     - target: {fileID: 7462358877823928103, guid: ddb8d505b45b8994792e3ace013de591,
         type: 3}
