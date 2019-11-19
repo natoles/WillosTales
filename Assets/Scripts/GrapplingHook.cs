@@ -71,8 +71,8 @@ public class GrapplingHook : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().useGravity = false;
             FPC.m_GravityMultiplier = 1;
 
-            playerTP.SetActive(true);
             playerTP.transform.position = FPC.transform.position;
+            playerTP.SetActive(true);
             soulLink.SetActive(true);
         }
 
