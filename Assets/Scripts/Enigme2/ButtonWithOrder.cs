@@ -13,6 +13,22 @@ public class ButtonWithOrder : MonoBehaviour
     float animTime = 0.7f;
     float animOffset = 0.2f;
     bool canClick = true;
+    public GameControl GC;
+    Renderer buttonRenderer;
+    public Material playerColor;
+    public Material soulColor;
+
+    void Start()
+    {
+        buttonRenderer = GetComponent<Renderer>();
+    }
+    void Update()
+    {
+        if(GC.isSoulMode)
+        {
+            buttonRenderer.material = soulColor;
+        } else buttonRenderer.material = playerColor;
+    }
 
     private void OnMouseDown()
     {

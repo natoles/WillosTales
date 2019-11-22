@@ -16,7 +16,7 @@ public class GameControl : MonoBehaviour
 
     string tpKey = "k";
     string changeKey = "l"; //Key to change mode
-    bool isSoulMode = true; //True : soul mode, False : player mode 
+    public bool isSoulMode = true; //True : soul mode, False : player mode 
     float maxSoulDist = 10f; //max distance between soul and player
     bool canChange = true;
 
