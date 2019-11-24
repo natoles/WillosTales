@@ -63,6 +63,7 @@ public class ButtonWithOrder : MonoBehaviour
 
     IEnumerator AnimateButton()
     {
+        FindObjectOfType<AudioManager>().Play("Switch");
         canClick = false;
         float elapsedTime = 0;
         Vector3 startPos = transform.localPosition;
