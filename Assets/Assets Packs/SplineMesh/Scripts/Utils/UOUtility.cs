@@ -26,7 +26,7 @@ namespace SplineMesh {
             if (Application.isPlaying) {
                 UnityEngine.Object.Destroy(go);
             } else {
-                //UnityEngine.Object.DestroyImmediate(go);
+                UnityEngine.Object.DestroyImmediate(go);
             }
         }
 
@@ -41,11 +41,7 @@ namespace SplineMesh {
         public static void DestroyChildren(GameObject go) {
             var childList = go.transform.Cast<Transform>().ToList();
             foreach (Transform childTransform in childList) {
-
-                if (!childTransform.GetChild(0).GetComponent<ParticleSystem>().IsAlive())
-                {
-                    Destroy(childTransform.gameObject);
-                }
+                Destroy(childTransform.gameObject);
             }
         }
     }

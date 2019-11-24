@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SplineMesh;
 using System;
+using System.Linq;
 
 /// <summary>
 /// Example of component to places assets along a spline. This component can be used as-is but will most likely be a base for your own component.
@@ -55,13 +56,12 @@ public class SoulSower : MonoBehaviour
         spline.nodes[1].Position = endPoint.localPosition;
         spline.nodes[1].Direction = endPoint.localPosition;
 
+        DestroyGeneratedChildren(generated);
         Sow();
     }
 
     public void Sow()
     {
-        UOUtility.DestroyChildren(generated);
-
         UnityEngine.Random.InitState(randomSeed);
         if (spacing + spacingRange <= 0 ||
             prefab == null)
@@ -100,6 +100,16 @@ public class SoulSower : MonoBehaviour
             go.transform.position += binormal;
 
             distance += spacing + UnityEngine.Random.Range(0, spacingRange);
+        }
+    }
+
+    public void DestroyGeneratedChildren(GameObject go)
+    {
+        var childList = go.transform.Cast<Transform>().ToList();
+        foreach (Transform childTransform in childList)
+        {
+            if (!childTransform.GetComponentInChildren<ParticleSystem>().IsAlive())
+                UOUtility.Destroy(childTransform.gameObject);
         }
     }
 }
