@@ -13,12 +13,14 @@ public class GameControl : MonoBehaviour
     public GameObject playerFP;
     public GameObject postProcessVolume;
     public GameObject menu;
+    public RotatingPlatform doorEnigma1;
 
     string tpKey = "k";
     string changeKey = "l"; //Key to change mode
     public bool isSoulMode = true; //True : soul mode, False : player mode 
     float maxSoulDist = 10f; //max distance between soul and player
     bool canChange = true;
+    bool canTP = false;
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
@@ -40,6 +42,8 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (doorEnigma1.activated) canTP = true;
+
         // Open or close the menu if the ESC key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
             OpenCloseMenu();
@@ -58,7 +62,7 @@ public class GameControl : MonoBehaviour
         }
 
         #region teleportation
-        if (Input.GetKeyDown(tpKey) && isSoulMode)
+        if (Input.GetKeyDown(tpKey) && isSoulMode && canTP)
         {
             playerFP.transform.position = playerTP.transform.position;
             FPController.isTP = true;

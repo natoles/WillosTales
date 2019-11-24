@@ -8,7 +8,7 @@ public class ButtonWithOrder : MonoBehaviour
     public int digit;
     float activationMaxDist = 15;
     int nbButtons = 6; 
-    int[] solution = new int[] {1, 2, 3, 4, 5, 6};
+    int[] solution = new int[] {4, 5, 3, 2, 6, 1};
     static int[] input = new int[] { -1, -1, -1, -1, -1, -1};
     float animTime = 0.7f;
     float animOffset = 0.2f;
@@ -18,6 +18,8 @@ public class ButtonWithOrder : MonoBehaviour
     Renderer buttonRenderer;
     public Material playerColor;
     public Material soulColor;
+    public GameObject player;
+    float clickDistance = 2.5f;
     
 
     void Start()
@@ -34,7 +36,7 @@ public class ButtonWithOrder : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(canClick)
+        if(canClick && Vector3.Distance(player.transform.position, transform.position) < clickDistance)
         {
             Debug.Log("Button " + digit);
             StartCoroutine(AnimateButton());

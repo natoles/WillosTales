@@ -7,6 +7,7 @@ public class Enigma2Control : MonoBehaviour
     public ButtonWithOrder button1;
     public GameObject bridge;
     public Transform repairedBridgePos;
+    public GameObject wall;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class Enigma2Control : MonoBehaviour
         if (button1.hasWon)
         {
             bridge.transform.position = repairedBridgePos.position;
+            wall.SetActive(false);
         }
     }
 }
