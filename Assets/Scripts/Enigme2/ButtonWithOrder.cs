@@ -13,10 +13,12 @@ public class ButtonWithOrder : MonoBehaviour
     float animTime = 0.7f;
     float animOffset = 0.2f;
     bool canClick = true;
+    public bool hasWon = false;
     public GameControl GC;
     Renderer buttonRenderer;
     public Material playerColor;
     public Material soulColor;
+    
 
     void Start()
     {
@@ -34,7 +36,7 @@ public class ButtonWithOrder : MonoBehaviour
     {
         if(canClick)
         {
-            Debug.Log(digit);
+            Debug.Log("Button " + digit);
             StartCoroutine(AnimateButton());
             for (int i = 0; i < nbButtons - 1; i++)
             {
@@ -51,7 +53,8 @@ public class ButtonWithOrder : MonoBehaviour
             if (flag)
             {
                 //Win sequence
-                Debug.Log("You Won !");
+                Debug.Log("You solved enigma 2 !");
+                hasWon = true;
             }
         }
     }
@@ -60,21 +63,21 @@ public class ButtonWithOrder : MonoBehaviour
     {
         canClick = false;
         float elapsedTime = 0;
-        float startPosZ = transform.position.z;
-        float endPosZ = transform.position.z - animOffset;
+        Vector3 startPos = transform.localPosition;
+        float endPosZ = transform.localPosition.z - animOffset;
         float tmp;
         while (elapsedTime < animTime)
         {
-            tmp = Mathf.Lerp(startPosZ, endPosZ, (elapsedTime / animTime));
-            transform.position = new Vector3(transform.position.x, transform.position.y, tmp);
+            tmp = Mathf.Lerp(0, animOffset, (elapsedTime / animTime));
+            transform.localPosition = startPos - transform.forward * tmp;
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         elapsedTime = 0;
         while (elapsedTime < animTime)
         {
-            tmp = Mathf.Lerp(endPosZ, startPosZ, (elapsedTime / animTime));
-            transform.position = new Vector3(transform.position.x, transform.position.y, tmp);
+            tmp = Mathf.Lerp(animOffset, 0, (elapsedTime / animTime));
+            transform.localPosition = startPos - transform.forward * tmp;
             elapsedTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
