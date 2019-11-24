@@ -1,24 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Respawn : MonoBehaviour
 {
-    Vector3 originalPos;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        originalPos = gameObject.transform.position;
-    }
+    private bool isDead;
+    public Animator anim;
+    public Image black;
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.transform.position.y <= 0.0)
+        if (isDead)
+            return;
+
+        if (this.transform.position.y <= 0.0)
         {
-            // TODO fade to black
-            gameObject.transform.position = originalPos;
+            isDead = true;
+            StartCoroutine(Dead());
         }
+    }
+
+    IEnumerator Dead()
+    {
+        FindObjectOfType<AudioManager>().Play("Death");
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isDead = false;
     }
 }
