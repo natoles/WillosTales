@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Selectable
   - Menu
+  - SoulView
+  - NormalView
   layers:
   - Default
   - TransparentFX
