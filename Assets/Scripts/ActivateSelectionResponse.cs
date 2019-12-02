@@ -9,13 +9,16 @@ public class ActivateSelectionResponse : MonoBehaviour, ISelectionResponse
         var actionable = selection.GetComponent<ActionableGameObject>();
         var outline = selection.GetComponent<Outline>();
 
-        if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
-            activationMaxDist)
-            outline.OutlineWidth = 10;
+        if (actionable != null)
+        {
+            if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
+                activationMaxDist)
+                outline.OutlineWidth = 10;
 
-        if (Input.GetMouseButtonDown(0) &&
-            Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) < activationMaxDist)
-            actionable.ActivateObject();
+            if (Input.GetMouseButtonDown(0) &&
+                Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) < activationMaxDist)
+                actionable.ActivateObject();
+        }
     }
 
     public void OnDeselect(Transform selection)

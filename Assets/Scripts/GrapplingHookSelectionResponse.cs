@@ -8,16 +8,18 @@ public class GrapplingHookSelectionResponse : MonoBehaviour, ISelectionResponse
     {
         var grapplingHook = selection.GetComponent<GraspableGameObject>();
         var outline = selection.GetComponent<Outline>();
-        
-        if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
-            activationMaxDist)
-            outline.OutlineWidth = 10;
 
-        if (Input.GetKeyDown(KeyCode.J) && grapplingHook != null &&
-            Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
-            activationMaxDist)
+        if (grapplingHook != null)
         {
-            grapplingHook.Trigger(selection);
+            if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
+                activationMaxDist)
+                outline.OutlineWidth = 10;
+
+            if (Input.GetKeyDown(KeyCode.J) &&
+                Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) < activationMaxDist)
+            {
+                grapplingHook.Trigger(selection);
+            }
         }
     }
 
