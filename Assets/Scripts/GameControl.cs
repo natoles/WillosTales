@@ -128,7 +128,7 @@ public class GameControl : MonoBehaviour
                 playerTP.SetActive(true);
                 soulLink.SetActive(true);
                 postProcessVolume.SetActive(true);
-                playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
+                //playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
 
                 cam.transform.parent = camRot.transform;
                 cam.transform.localPosition = new Vector3(0, 1, -8f);
@@ -139,6 +139,7 @@ public class GameControl : MonoBehaviour
                 TPMouse.canMove = true;
                 TPMove.canMove = true;
                 FPController.canMove = false;
+                StartCoroutine(animationTransition());
             }
             isSoulMode = !isSoulMode;
         }
@@ -182,6 +183,29 @@ public class GameControl : MonoBehaviour
         canTP = false;
         yield return new WaitForSeconds(cooldownTPduration);
         canTP = true;
+    }
+    
+    IEnumerator animationTransition()
+    {
+        TPMouse.canMove = false;
+        TPMove.canMove = false;
+        canChange = false;
+        Vector3 startPos = playerFP.transform.position;
+        Vector3 endPos = playerFP.transform.position + playerFP.transform.forward * 2;
+        startPos += Vector3.up * 0.7f;
+        endPos += Vector3.up * 0.7f;
+        playerTP.transform.position = startPos;
+        camRot.transform.rotation = playerFP.transform.rotation;
+        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f)
+        {
+            playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
+                endPos, 0.5f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+        
+            yield return null;
+        }
+        TPMouse.canMove = true;
+        TPMove.canMove = true;
+        canChange = true;
     }
 
 }
