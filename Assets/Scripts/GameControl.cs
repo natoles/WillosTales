@@ -21,6 +21,8 @@ public class GameControl : MonoBehaviour
     float maxSoulDist = 10f; //max distance between soul and player
     bool canChange = true;
     bool canTP = false;
+    public float cooldownTPduration = 5; //seconds
+    bool activatedTP = false;
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
@@ -42,7 +44,12 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (doorEnigma1.activated) canTP = true;
+        if (doorEnigma1.activated && !activatedTP)
+        {
+            activatedTP = true;
+            canTP = true;
+        }
+            
 
         // Open or close the menu if the ESC key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -68,6 +75,7 @@ public class GameControl : MonoBehaviour
             FPController.isTP = true;
             Debug.Log("TP");
             ModeChangerHandler();
+            StartCoroutine(cooldownTPRoutine());
         }
         #endregion
     }
@@ -167,8 +175,13 @@ public class GameControl : MonoBehaviour
         playerTP.SetActive(false);
 
         //code goes here
+    }
 
-
+    IEnumerator cooldownTPRoutine()
+    {
+        canTP = false;
+        yield return new WaitForSeconds(cooldownTPduration);
+        canTP = true;
     }
 
 }
