@@ -37,10 +37,8 @@ public class TPMouseMovement : MonoBehaviour
             {
                 transform.localEulerAngles = Vector3.zero;
                 rotationY = 0;
-                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 axisXOffset = Input.GetAxis("Mouse X");
                 axisYOffset = Input.GetAxis("Mouse Y");
-                Debug.Log(axisXOffset);
                 setOffset = true;
             }
         }
