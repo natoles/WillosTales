@@ -27,6 +27,7 @@ public class EndGame : MonoBehaviour
         anim.SetBool("FadeBack", true);
         yield return new WaitUntil(()=>black.color.a==0);
         yield return new WaitForSeconds(3f);
+        anim.SetBool("FadeBack", false);
         anim.SetBool("Fade", true);
         yield return new WaitUntil(()=>black.color.a==1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
