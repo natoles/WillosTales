@@ -27,6 +27,7 @@ public class GameControl : MonoBehaviour
     TPMouseMovement TPMouse;
     TPMovement TPMove;
     FirstPersonController FPController;
+    Animator animFP;
 
     
 
@@ -35,6 +36,7 @@ public class GameControl : MonoBehaviour
         TPMouse = playerTP.GetComponent<TPMouseMovement>();
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPController = playerFP.GetComponent<FirstPersonController>();
+        animFP = playerFP.GetComponent<Animator>();
 
         Physics.IgnoreCollision(playerFP.GetComponent<CharacterController>(), playerTP.GetComponent<Collider>());
 
@@ -99,6 +101,7 @@ public class GameControl : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             LockInputs();
+            animFP.SetBool("isWalking", false);
 
         }
     }
@@ -129,7 +132,7 @@ public class GameControl : MonoBehaviour
                 soulLink.SetActive(true);
                 postProcessVolume.SetActive(true);
                 //playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
-
+                CancelAnimations();
                 cam.transform.parent = camRot.transform;
                 cam.transform.localPosition = new Vector3(0, 1, -8f);
 
@@ -166,6 +169,13 @@ public class GameControl : MonoBehaviour
             FPController.canMove = true;
         }
         canChange = true;
+    }
+
+    void CancelAnimations()
+    {
+        animFP.SetBool("isWalking", false);
+        animFP.SetBool("isJumping", false);
+        animFP.SetBool("grounded", false);
     }
 
     IEnumerator DeactivateSoul()
