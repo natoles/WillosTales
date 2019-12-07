@@ -27,6 +27,7 @@ public class GameControl : MonoBehaviour
     TPMouseMovement TPMouse;
     TPMovement TPMove;
     FirstPersonController FPController;
+    Animator animFP;
 
     
 
@@ -35,6 +36,7 @@ public class GameControl : MonoBehaviour
         TPMouse = playerTP.GetComponent<TPMouseMovement>();
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPController = playerFP.GetComponent<FirstPersonController>();
+        animFP = playerFP.GetComponent<Animator>();
 
         Physics.IgnoreCollision(playerFP.GetComponent<CharacterController>(), playerTP.GetComponent<Collider>());
 
@@ -99,6 +101,7 @@ public class GameControl : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             LockInputs();
+            animFP.SetBool("isWalking", false);
 
         }
     }
@@ -110,17 +113,8 @@ public class GameControl : MonoBehaviour
             Debug.Log("Changement mode");
             if (isSoulMode)
             {
-                //Enters in FP 
-                StartCoroutine(DeactivateSoul());
-                soulLink.SetActive(false);
-                postProcessVolume.SetActive(false);
-
-                cam.transform.parent = playerFP.transform;
-                cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
-
-                TPMouse.canMove = false;
-                TPMove.canMove = false;
-                FPController.canMove = true;
+                //Enters in FP
+                StartCoroutine(animationTransitionTPtoFP());
             }
             else
             {
@@ -128,18 +122,14 @@ public class GameControl : MonoBehaviour
                 playerTP.SetActive(true);
                 soulLink.SetActive(true);
                 postProcessVolume.SetActive(true);
-                //playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
-
-                cam.transform.parent = camRot.transform;
-                cam.transform.localPosition = new Vector3(0, 1, -8f);
-
+                CancelAnimations();
+                
                 playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
                 cam.transform.localEulerAngles = Vector3.zero;
 
                 TPMouse.canMove = true;
-                TPMove.canMove = true;
                 FPController.canMove = false;
-                StartCoroutine(animationTransition());
+                StartCoroutine(animationTransitionFPtoTP());
             }
             isSoulMode = !isSoulMode;
         }
@@ -168,14 +158,11 @@ public class GameControl : MonoBehaviour
         canChange = true;
     }
 
-    IEnumerator DeactivateSoul()
+    void CancelAnimations()
     {
-        playerTP.transform.position = Vector3.zero;
-        //returning 0 will make it wait 1 frame
-        yield return 0;
-        playerTP.SetActive(false);
-
-        //code goes here
+        animFP.SetBool("isWalking", false);
+        animFP.SetBool("isJumping", false);
+        animFP.SetBool("grounded", false);
     }
 
     IEnumerator cooldownTPRoutine()
@@ -185,26 +172,77 @@ public class GameControl : MonoBehaviour
         canTP = true;
     }
     
-    IEnumerator animationTransition()
+    IEnumerator animationTransitionFPtoTP()
     {
-        TPMouse.canMove = false;
+        StartCoroutine(camAnimationFPtoTP());
         TPMove.canMove = false;
         canChange = false;
+        float maxDuration = 3f;
+        float normalizedTime = 0;
         Vector3 startPos = playerFP.transform.position;
         Vector3 endPos = playerFP.transform.position + playerFP.transform.forward * 2;
         startPos += Vector3.up * 0.7f;
         endPos += Vector3.up * 0.7f;
         playerTP.transform.position = startPos;
         camRot.transform.rotation = playerFP.transform.rotation;
-        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f)
+        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f && normalizedTime <= 1f)
         {
             playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
-                endPos, 0.5f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
-        
+                endPos, 0.7f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+            normalizedTime += Time.deltaTime/maxDuration;
             yield return null;
         }
-        TPMouse.canMove = true;
         TPMove.canMove = true;
+        canChange = true;
+    }
+    
+    IEnumerator camAnimationFPtoTP()
+    {
+        
+        cam.transform.parent = camRot.transform;
+        cam.transform.localPosition = Vector3.zero;
+        Vector3 startPos = cam.transform.localPosition;
+        
+        Vector3 endPos = new Vector3(0, 1, -8f);
+        while (Vector3.Distance(cam.transform.localPosition, endPos) > .05f)
+        {
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition,
+                endPos, 2f * Time.deltaTime / Vector3.Distance(cam.transform.localPosition, endPos));
+            yield return null;
+        }
+        
+        cam.transform.localPosition = new Vector3(0, 1, -8f);
+    }
+
+    IEnumerator animationTransitionTPtoFP()
+    {
+        TPMouse.canMove = false;
+        TPMove.canMove = false;
+        canChange = false;
+        float maxDuration = 3f;
+        float normalizedTime = 0;
+        Vector3 endPos = playerFP.transform.position;
+        endPos += Vector3.up * 0.7f;
+        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f && normalizedTime <= 1f)
+        {
+            playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
+                endPos, 10f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+            normalizedTime += Time.deltaTime / maxDuration;
+            yield return null;
+        }
+
+        playerTP.transform.position = Vector3.zero;
+        //returning 0 will make it wait 1 frame
+        yield return 0;
+        playerTP.SetActive(false);
+
+        soulLink.SetActive(false);
+        postProcessVolume.SetActive(false);
+
+        cam.transform.parent = playerFP.transform;
+        cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); 
+
+        FPController.canMove = true;
         canChange = true;
     }
 
