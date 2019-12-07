@@ -118,6 +118,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void FixedUpdate()
         {
+            if(m_Jumping)
+            {
+                m_Jump = false;
+            }
             if (canMove)
             {
                 

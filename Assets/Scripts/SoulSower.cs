@@ -50,11 +50,12 @@ public class SoulSower : MonoBehaviour
 
         spline = GetComponentInParent<Spline>();
 
+
         spline.nodes[0].Position = startPoint.localPosition;
         spline.nodes[0].Direction = startPoint.localPosition;
 
-        spline.nodes[1].Position = endPoint.localPosition;
-        spline.nodes[1].Direction = endPoint.localPosition;
+        spline.nodes[1].Position = endPoint.localPosition + Vector3.up * 0.7f;
+        spline.nodes[1].Direction = endPoint.localPosition + Vector3.up * 0.7f;
 
         DestroyGeneratedChildren(generated);
         Sow();

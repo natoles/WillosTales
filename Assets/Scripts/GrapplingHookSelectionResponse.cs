@@ -1,23 +1,25 @@
 ﻿using UnityEngine;
 
-public class ActivateSelectionResponse : MonoBehaviour, ISelectionResponse
+public class GrapplingHookSelectionResponse : MonoBehaviour, ISelectionResponse
 {
-    [SerializeField, Range(0f, 10f)] public float activationMaxDist = 5f;
+    [SerializeField, Range(0f, 50f)] public float activationMaxDist = 20f;
 
     public void OnSelect(Transform selection)
     {
-        var actionable = selection.GetComponent<ActionableGameObject>();
+        var grapplingHook = selection.GetComponent<GraspableGameObject>();
         var outline = selection.GetComponent<Outline>();
 
-        if (actionable != null)
+        if (grapplingHook != null)
         {
             if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
                 activationMaxDist)
                 outline.OutlineWidth = 10;
 
-            if (Input.GetMouseButtonDown(0) &&
+            if (Input.GetKeyDown(KeyCode.J) &&
                 Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) < activationMaxDist)
-                actionable.ActivateObject();
+            {
+                grapplingHook.Trigger(selection);
+            }
         }
     }
 
