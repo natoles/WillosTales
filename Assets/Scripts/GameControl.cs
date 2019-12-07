@@ -113,6 +113,7 @@ public class GameControl : MonoBehaviour
             Debug.Log("Changement mode");
             if (isSoulMode)
             {
+                //Enters in FP
                 StartCoroutine(animationTransitionTPtoFP());
             }
             else
@@ -121,16 +122,12 @@ public class GameControl : MonoBehaviour
                 playerTP.SetActive(true);
                 soulLink.SetActive(true);
                 postProcessVolume.SetActive(true);
-                //playerTP.transform.position = playerFP.transform.position + playerFP.transform.forward * 2; //Soul spawn position
                 CancelAnimations();
-                cam.transform.parent = camRot.transform;
-                cam.transform.localPosition = new Vector3(0, 1, -8f);
-
+                
                 playerTP.transform.localEulerAngles = playerFP.transform.localEulerAngles;
                 cam.transform.localEulerAngles = Vector3.zero;
 
                 TPMouse.canMove = true;
-                TPMove.canMove = true;
                 FPController.canMove = false;
                 StartCoroutine(animationTransitionFPtoTP());
             }
@@ -177,7 +174,7 @@ public class GameControl : MonoBehaviour
     
     IEnumerator animationTransitionFPtoTP()
     {
-        TPMouse.canMove = false;
+        StartCoroutine(camAnimationFPtoTP());
         TPMove.canMove = false;
         canChange = false;
         float maxDuration = 3f;
@@ -195,9 +192,26 @@ public class GameControl : MonoBehaviour
             normalizedTime += Time.deltaTime/maxDuration;
             yield return null;
         }
-        TPMouse.canMove = true;
         TPMove.canMove = true;
         canChange = true;
+    }
+    
+    IEnumerator camAnimationFPtoTP()
+    {
+        
+        cam.transform.parent = camRot.transform;
+        cam.transform.localPosition = Vector3.zero;
+        Vector3 startPos = cam.transform.localPosition;
+        
+        Vector3 endPos = new Vector3(0, 1, -8f);
+        while (Vector3.Distance(cam.transform.localPosition, endPos) > .05f)
+        {
+            cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition,
+                endPos, 2f * Time.deltaTime / Vector3.Distance(cam.transform.localPosition, endPos));
+            yield return null;
+        }
+        
+        cam.transform.localPosition = new Vector3(0, 1, -8f);
     }
 
     IEnumerator animationTransitionTPtoFP()
@@ -226,7 +240,7 @@ public class GameControl : MonoBehaviour
         postProcessVolume.SetActive(false);
 
         cam.transform.parent = playerFP.transform;
-        cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
+        cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); 
 
         FPController.canMove = true;
         canChange = true;
