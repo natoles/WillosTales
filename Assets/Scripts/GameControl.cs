@@ -23,11 +23,13 @@ public class GameControl : MonoBehaviour
     bool canTP = false;
     public float cooldownTPduration = 5; //seconds
     bool activatedTP = false;
+    Vector3 baseCamRot;
 
     TPMouseMovement TPMouse;
     TPMovement TPMove;
     FirstPersonController FPController;
     Animator animFP;
+    
 
     
 
@@ -37,6 +39,7 @@ public class GameControl : MonoBehaviour
         TPMove  = playerTP.GetComponent<TPMovement>();
         FPController = playerFP.GetComponent<FirstPersonController>();
         animFP = playerFP.GetComponent<Animator>();
+        baseCamRot = camRot.transform.eulerAngles;
 
         Physics.IgnoreCollision(playerFP.GetComponent<CharacterController>(), playerTP.GetComponent<Collider>());
 
@@ -198,7 +201,10 @@ public class GameControl : MonoBehaviour
     
     IEnumerator camAnimationFPtoTP()
     {
-        
+        //playerTP.transform.eulerAngles = Vector3.zero;
+        camRot.transform.eulerAngles = baseCamRot;
+        cam.transform.eulerAngles = Vector3.zero;
+
         cam.transform.parent = camRot.transform;
         cam.transform.localPosition = Vector3.zero;
         Vector3 startPos = cam.transform.localPosition;
@@ -206,8 +212,12 @@ public class GameControl : MonoBehaviour
         Vector3 endPos = new Vector3(0, 1, -8f);
         while (Vector3.Distance(cam.transform.localPosition, endPos) > .05f)
         {
+            //playerTP.transform.eulerAngles = Vector3.zero;
+            //camRot.transform.eulerAngles = Vector3.zero;
+            
             cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition,
-                endPos, 2f * Time.deltaTime / Vector3.Distance(cam.transform.localPosition, endPos));
+                endPos, 4f * Time.deltaTime / Vector3.Distance(cam.transform.localPosition, endPos));
+
             yield return null;
         }
         
@@ -216,7 +226,6 @@ public class GameControl : MonoBehaviour
 
     IEnumerator animationTransitionTPtoFP()
     {
-        TPMouse.canMove = false;
         TPMove.canMove = false;
         canChange = false;
         float maxDuration = 3f;
@@ -226,7 +235,7 @@ public class GameControl : MonoBehaviour
         while (Vector3.Distance(playerTP.transform.position, endPos) > .5f && normalizedTime <= 1f)
         {
             playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
-                endPos, 10f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+                endPos, 7f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
             normalizedTime += Time.deltaTime / maxDuration;
             yield return null;
         }
@@ -243,6 +252,7 @@ public class GameControl : MonoBehaviour
         cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); 
 
         FPController.canMove = true;
+        TPMouse.canMove = false;
         canChange = true;
     }
 

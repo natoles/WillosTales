@@ -33,14 +33,16 @@ public class TPMouseMovement : MonoBehaviour
         } 
         else
         {
+            /*
             if(!setOffset)
             {
                 transform.localEulerAngles = Vector3.zero;
                 rotationY = 0;
+                cameraRotator.transform.eulerAngles = Vector3.zero;
                 axisXOffset = Input.GetAxis("Mouse X");
                 axisYOffset = Input.GetAxis("Mouse Y");
                 setOffset = true;
-            }
+            }*/
         }
     }
 
@@ -51,4 +53,5 @@ public class TPMouseMovement : MonoBehaviour
         if (rigidbody)
             rigidbody.freezeRotation = true;
     }
+
 }
