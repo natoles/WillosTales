@@ -113,17 +113,7 @@ public class GameControl : MonoBehaviour
             Debug.Log("Changement mode");
             if (isSoulMode)
             {
-                //Enters in FP 
-                StartCoroutine(DeactivateSoul());
-                soulLink.SetActive(false);
-                postProcessVolume.SetActive(false);
-
-                cam.transform.parent = playerFP.transform;
-                cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
-
-                TPMouse.canMove = false;
-                TPMove.canMove = false;
-                FPController.canMove = true;
+                StartCoroutine(animationTransitionTPtoFP());
             }
             else
             {
@@ -142,7 +132,7 @@ public class GameControl : MonoBehaviour
                 TPMouse.canMove = true;
                 TPMove.canMove = true;
                 FPController.canMove = false;
-                StartCoroutine(animationTransition());
+                StartCoroutine(animationTransitionFPtoTP());
             }
             isSoulMode = !isSoulMode;
         }
@@ -178,16 +168,6 @@ public class GameControl : MonoBehaviour
         animFP.SetBool("grounded", false);
     }
 
-    IEnumerator DeactivateSoul()
-    {
-        playerTP.transform.position = Vector3.zero;
-        //returning 0 will make it wait 1 frame
-        yield return 0;
-        playerTP.SetActive(false);
-
-        //code goes here
-    }
-
     IEnumerator cooldownTPRoutine()
     {
         canTP = false;
@@ -195,7 +175,7 @@ public class GameControl : MonoBehaviour
         canTP = true;
     }
     
-    IEnumerator animationTransition()
+    IEnumerator animationTransitionFPtoTP()
     {
         TPMouse.canMove = false;
         TPMove.canMove = false;
@@ -217,6 +197,38 @@ public class GameControl : MonoBehaviour
         }
         TPMouse.canMove = true;
         TPMove.canMove = true;
+        canChange = true;
+    }
+
+    IEnumerator animationTransitionTPtoFP()
+    {
+        TPMouse.canMove = false;
+        TPMove.canMove = false;
+        canChange = false;
+        float maxDuration = 3f;
+        float normalizedTime = 0;
+        Vector3 endPos = playerFP.transform.position;
+        endPos += Vector3.up * 0.7f;
+        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f && normalizedTime <= 1f)
+        {
+            playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
+                endPos, 10f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+            normalizedTime += Time.deltaTime / maxDuration;
+            yield return null;
+        }
+
+        playerTP.transform.position = Vector3.zero;
+        //returning 0 will make it wait 1 frame
+        yield return 0;
+        playerTP.SetActive(false);
+
+        soulLink.SetActive(false);
+        postProcessVolume.SetActive(false);
+
+        cam.transform.parent = playerFP.transform;
+        cam.transform.localPosition = new Vector3(0.1f, 1f, 0.15f); //Local position of the camera
+
+        FPController.canMove = true;
         canChange = true;
     }
 
