@@ -200,17 +200,19 @@ public class GameControl : MonoBehaviour
         TPMouse.canMove = false;
         TPMove.canMove = false;
         canChange = false;
+        float maxDuration = 3f;
+        float normalizedTime = 0;
         Vector3 startPos = playerFP.transform.position;
         Vector3 endPos = playerFP.transform.position + playerFP.transform.forward * 2;
         startPos += Vector3.up * 0.7f;
         endPos += Vector3.up * 0.7f;
         playerTP.transform.position = startPos;
         camRot.transform.rotation = playerFP.transform.rotation;
-        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f)
+        while (Vector3.Distance(playerTP.transform.position, endPos) > .5f && normalizedTime <= 1f)
         {
             playerTP.transform.position = Vector3.Lerp(playerTP.transform.position,
-                endPos, 0.5f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
-        
+                endPos, 0.7f * Time.deltaTime / Vector3.Distance(playerTP.transform.position, endPos));
+            normalizedTime += Time.deltaTime/maxDuration;
             yield return null;
         }
         TPMouse.canMove = true;
