@@ -28,7 +28,7 @@ public class EndGame : MonoBehaviour
         yield return new WaitUntil(()=>black.color.a==0);
         yield return new WaitForSeconds(3f);
         anim.SetBool("Fade", true);
-        
+        yield return new WaitUntil(()=>black.color.a==1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
