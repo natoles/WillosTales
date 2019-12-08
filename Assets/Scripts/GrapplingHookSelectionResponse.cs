@@ -3,6 +3,7 @@
 public class GrapplingHookSelectionResponse : MonoBehaviour, ISelectionResponse
 {
     [SerializeField, Range(0f, 50f)] public float activationMaxDist = 20f;
+    public GameObject customPointer;
 
     public void OnSelect(Transform selection)
     {
@@ -13,7 +14,10 @@ public class GrapplingHookSelectionResponse : MonoBehaviour, ISelectionResponse
         {
             if (outline != null && Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) <
                 activationMaxDist)
+            {
                 outline.OutlineWidth = 10;
+                customPointer.SetActive(true);
+            }
 
             if (Input.GetKeyDown(KeyCode.J) &&
                 Vector3.Distance(Camera.main.gameObject.transform.position, selection.position) < activationMaxDist)
@@ -27,5 +31,6 @@ public class GrapplingHookSelectionResponse : MonoBehaviour, ISelectionResponse
     {
         var outline = selection.GetComponent<Outline>();
         if (outline != null) outline.OutlineWidth = 0;
+        customPointer.SetActive(false);
     }
 }

@@ -26,7 +26,7 @@ public class Respawn : MonoBehaviour
     IEnumerator Dead()
     {
         FindObjectOfType<AudioManager>().Play("Death");
-        anim.SetBool("Fade", true);
+        anim.SetBool("FadeOUT", true);
         yield return new WaitUntil(() => black.color.a == 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         isDead = false;

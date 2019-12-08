@@ -20,15 +20,15 @@ public class EndGame : MonoBehaviour
     
     IEnumerator Fading()
     {
-        anim.SetBool("Fade", true);
+        anim.SetBool("FadeOUT", true);
         yield return new WaitUntil(()=>black.color.a==1);
-        anim.SetBool("Fade", false);
+        anim.SetBool("FadeOUT", false);
         menu.SetActive(!menu.activeSelf);
-        anim.SetBool("FadeBack", true);
+        anim.SetBool("FadeIN", true);
         yield return new WaitUntil(()=>black.color.a==0);
         yield return new WaitForSeconds(3f);
-        anim.SetBool("FadeBack", false);
-        anim.SetBool("Fade", true);
+        anim.SetBool("FadeIN", false);
+        anim.SetBool("FadeOUT", true);
         yield return new WaitUntil(()=>black.color.a==1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         Cursor.visible = true;

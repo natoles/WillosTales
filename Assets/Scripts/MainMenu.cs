@@ -23,7 +23,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator Fading()
     {
-        anim.SetBool("Fade", true);
+        anim.SetBool("FadeOUT", true);
         yield return new WaitUntil(()=>black.color.a==1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
