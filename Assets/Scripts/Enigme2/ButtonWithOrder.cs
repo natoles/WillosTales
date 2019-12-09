@@ -19,7 +19,7 @@ public class ButtonWithOrder : MonoBehaviour
     public Material playerColor;
     public Material soulColor;
     public GameObject player;
-    float clickDistance = 2.5f;
+    float clickDistance = 5f;
     Animator anim;
     
 
