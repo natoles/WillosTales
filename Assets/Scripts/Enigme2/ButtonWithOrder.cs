@@ -8,7 +8,7 @@ public class ButtonWithOrder : MonoBehaviour
     public int digit;
     float activationMaxDist = 15;
     int nbButtons = 6; 
-    int[] solution = new int[] {4, 5, 3, 2, 6, 1};
+    public int[] solution = new int[] {4, 5, 3, 2, 6, 1};
     static int[] input = new int[] { -1, -1, -1, -1, -1, -1};
     float animTime = 0.7f;
     float animOffset = 0.2f;
@@ -20,11 +20,13 @@ public class ButtonWithOrder : MonoBehaviour
     public Material soulColor;
     public GameObject player;
     float clickDistance = 2.5f;
+    Animator anim;
     
 
     void Start()
     {
         buttonRenderer = GetComponent<Renderer>();
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -32,6 +34,14 @@ public class ButtonWithOrder : MonoBehaviour
         {
             buttonRenderer.material = soulColor;
         } else buttonRenderer.material = playerColor;
+
+        if(anim.GetBool("isPushed"))
+        {
+            if(!anim.IsInTransition(0) && anim.GetCurrentAnimatorStateInfo(0).IsName("PressButton"))
+            {
+                anim.SetBool("isPushed", false);
+            }
+        }
     }
 
     private void OnMouseDown()
@@ -49,7 +59,10 @@ public class ButtonWithOrder : MonoBehaviour
             bool flag = true;
             for (int i = 0; i < nbButtons; i++)
             {
-                if (solution[i] != input[i]) flag = false;
+                if (solution[i] != input[i])
+                {
+                    flag = false;
+                }
             }
 
             if (flag)
@@ -65,25 +78,8 @@ public class ButtonWithOrder : MonoBehaviour
     {
         FindObjectOfType<AudioManager>().Play("Switch");
         canClick = false;
-        float elapsedTime = 0;
-        Vector3 startPos = transform.localPosition;
-        float endPosZ = transform.localPosition.z - animOffset;
-        float tmp;
-        while (elapsedTime < animTime)
-        {
-            tmp = Mathf.Lerp(0, animOffset, (elapsedTime / animTime));
-            transform.localPosition = startPos - transform.forward * tmp;
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        elapsedTime = 0;
-        while (elapsedTime < animTime)
-        {
-            tmp = Mathf.Lerp(animOffset, 0, (elapsedTime / animTime));
-            transform.localPosition = startPos - transform.forward * tmp;
-            elapsedTime += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
+        anim.SetBool("isPushed", true);
         canClick = true;
+        yield return new WaitForEndOfFrame();
     }
 }
