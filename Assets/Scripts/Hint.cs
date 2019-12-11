@@ -31,22 +31,13 @@ public class Hint : MonoBehaviour
             StartCoroutine(Fade());
         }
     }
-    
-    public void hide()
-    {
-        hintCanvas.gameObject.SetActive(false);
-    }
 
     IEnumerator Fade()
     {
-        anim.SetBool("FadeIN", true);
+        anim.SetBool("Fade", true);
         yield return new WaitUntil(()=>background.color.a>=0.39);
-        anim.SetBool("FadeIN", false);
         yield return new WaitForSeconds(5f);
-        anim.SetBool("FadeOUT", true);
+        anim.SetBool("Fade", false);
         yield return new WaitUntil(()=>background.color.a==0);
-        anim.SetBool("FadeOUT", false);
-        hide();
-        
     }
 }
