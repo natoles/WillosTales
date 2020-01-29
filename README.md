@@ -4,7 +4,7 @@ Willo's Tale is a low-poly puzzle and platform game in 3D made with Unity by fou
 ## Running the game
 
 ### Windows
-To run the game on a Windows computer, simply [download](https://github.com/natoles/WillosTales/releases/tag/v1.0) the game directory and execute `DungeonQuest.exe`.
+To run the game on a Windows computer, simply [download](https://github.com/natoles/WillosTales/releases/tag/v1.0) the game directory and execute `WillosTales.exe`.
 
 ### Linux and MacOS
 If you wants to run the game on Linux or MacOS, please check the [`dev` branch](https://github.com/natoles/WillosTales/tree/dev).
